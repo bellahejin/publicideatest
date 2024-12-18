@@ -12,6 +12,7 @@ public class HelloTest {
     public  void  testHello() {
         SayHello hello = new SayHello();
         String maven = hello.say("maven！！main");
+        String maven = hello.say("maven！！deev");
         System.out.println(maven);
     }
 }
