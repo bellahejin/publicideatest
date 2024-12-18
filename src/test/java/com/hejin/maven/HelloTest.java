@@ -11,7 +11,7 @@ public class HelloTest {
     @Test
     public  void  testHello() {
         SayHello hello = new SayHello();
-        String maven = hello.say("maven！");
+        String maven = hello.say("maven！！");
         System.out.println(maven);
     }
 }
