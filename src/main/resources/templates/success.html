@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--使用 thymeleaf 模板引擎-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--修改文案取接口返回内容，默认值是：默认文案，修改哪个属性，就th:属性名-->
+<h1 th:text="${msg}">默认文案</h1>
+<h2>
+    <!--修改哪个属性，就th:属性名-->
+    <a href="https://www.keep.com" th:href="${link}">跳转链接</a>
+</h2>
+
+</body>
+</html>

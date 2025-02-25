@@ -1,4 +1,4 @@
-# yaml表示以上对象
+# yaml表示以下对象
 person:
   userName: xiaodumi
   boss: false
@@ -24,3 +24,4 @@ person:
       - {name: tom}
       - {name: jerry,weight: 47}
     health: [{name: mario,weight: 47}]
+

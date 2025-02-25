@@ -26,15 +26,25 @@
             <version>4.13.2</version>
         </dependency>
 
+        <!-- web 服务启动器  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- 提供各种注解比如 get set -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- 静态资源自动映射 /webjars/** -->
+        <!-- 访问地址：http://localhost:8086/webjars/jquery/3.5.1/jquery.js -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1</version>
         </dependency>
 
         <dependency>
@@ -47,6 +57,12 @@
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
     </dependencies>
 

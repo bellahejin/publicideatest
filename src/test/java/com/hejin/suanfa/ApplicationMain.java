@@ -1,6 +1,5 @@
 package com.hejin.suanfa;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 
 /**
@@ -33,7 +32,7 @@ public class ApplicationMain {
         System.out.println(isPalindromeString);
 
         //输出带空格字符串中对称的单词
-        ArrayList<String> symmetricalWords = solution.symmetricalWords("age aga goog");
+        ArrayList<String> symmetricalWords = solution.symmetricalWords("age aga gooj");
         for(Object obj : symmetricalWords){
             System.out.println(obj);
         }
@@ -65,6 +64,31 @@ public class ApplicationMain {
         //在有序数组中，找到 9 的插入位置并返回
         int ins = solution.findInsert(new int[]{1,2,10,13}, 9);
         System.out.println(ins);
+
+        //原地查找有序数组中的不重复数字长度，比如[0,0,2,2,3]，输出[0,2,3]长度是 3
+        int noRepite = solution.noRepite(new int[]{0,0,2,2,3});
+        System.out.println(noRepite);
+
+        //查找数组中的重复数字（京东面试题）
+        HashSet<Integer> repetitionNum=solution.repetitionNum(new int[]{1,7,2,2,4,4});
+        System.out.println("重复数字是：" + repetitionNum.toString());
+
+        //求数组中只出现一次的数字列表
+        List<Integer> uniqueNum = solution.uniqueNum(new int[]{9,4,3,2,2,2,10,5,10});
+        System.out.println("只出现 1 次的数字是：" + uniqueNum.toString());
+
+        //两个升序数组，合并成一个升序数组
+        int[] merge = solution.merge(new int[]{5, 9, 12}, new int[]{8, 9, 10});
+        System.out.println("合并后的数组是："+ Arrays.toString(merge));
+
+        //天眼查面试题
+        //V2.3.4A 、 V3.2.1B，按以上格式输入两个版本号，编写函数实现返回最新的版本号？
+        String getVersion = solution.getVersion("V4.2.3C", "V4.2.3D");
+        System.out.println("最新的版本号是：" + getVersion);
+
+        //天眼查面试题
+        //鸡兔在一个笼子里，一共20只动物，笼子里52只腿；求鸡有多少只、兔有多少只
+        solution.munAnimails();
     }
 
 }

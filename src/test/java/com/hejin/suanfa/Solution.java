@@ -85,15 +85,13 @@ public class Solution {
     //输出带空格字符串中对称的单词
     public ArrayList<String> symmetricalWords(String str){
         String[] strlist = str.split(" ");
-        int strlen = strlist.length;
-        ArrayList<String> subStr = new ArrayList<String>();
+        ArrayList<String> subStr = new ArrayList<>();
         if(str == ""){
             subStr.add("no result!");
             return subStr;
         }
         //遍历每个单词，判断是不是回文字符串
-        for(int i = 0; i < strlen; i++){
-            String strlisti = strlist[i];
+        for(String strlisti : strlist){
             int len = strlisti.length();
             boolean boo = false;
             int j = 0;
@@ -113,7 +111,7 @@ public class Solution {
         return subStr;
     }
 
-    //字符串中最长不重复子串的字符数
+    //字符串中最长不重复子串的字符数，滑动窗口
     public int maxSub(String string){
         HashSet<Character> set= new HashSet<Character>(); //用 set 存放不重复的子串字符
         int len = string.length();
@@ -163,7 +161,7 @@ public class Solution {
     public int[] bubbleSort(int[] list){
         int len = list.length;
         for (int i = 0; i < len - 1; i++){ //控制轮数
-            for (int j = 1; j < len - i - 1; j++){ //控制每轮遍历长度
+            for (int j = 0; j < len - i - 1; j++){ //控制每轮遍历长度
                 if(list[j] > list[j+1]){
                     int temp = list[j+1];
                     list[j+1] = list[j];
@@ -192,6 +190,7 @@ public class Solution {
     }
 
     //原地将数组中的 0 移动到末尾 (领岳科技面试题)
+    //快慢指针简题
     //原地移除 arr 数组中数值等于 x 的数，并返回最新的 arr 长度，也是此解法
     public int[] lastZero(int[] arr){
         int noZero = 0; //noZero 是慢指针，用来记录非 0 数字应该存放的位置
@@ -239,8 +238,9 @@ public class Solution {
         return new String(ch);
     }
 
-    //查找数组中的重复数字（京东面试题）
-    public Set<Integer> repetitionNum(int[] arr){
+    //查找数组中的重复数字（京东面试题）比如[1,9,3,5,2,2,4,4],输出是[2,4]
+    //查找数组中的不重复数字，比如[1,9,3,5,2,2,4,4],输出是[1,9,3,5,2,4]，也是这个思路，return use 即可
+    public HashSet<Integer> repetitionNum(int[] arr){
         HashSet<Integer> use = new HashSet<>();
         HashSet<Integer> repetition = new HashSet<>();
 
@@ -250,7 +250,6 @@ public class Solution {
                 repetition.add(num);
             }
         }
-
         return repetition;
     }
 
@@ -296,7 +295,7 @@ public class Solution {
         int slow = 1; //慢指针，用来记住不重复数字需要复制到的下标
         while(fast < n){
             //fast 开始扫描，只要遇到不重复的数字，就复制到 slow 的位置，slow 往后移动 1
-            if(arr[fast] == arr[fast-1]){
+            if(arr[fast] != arr[fast-1]){
                 arr[slow] = arr[fast];
                 slow++;
             }
@@ -305,7 +304,7 @@ public class Solution {
         return slow;
     }
 
-    //求无序数组中不重复的数字列表并返回
+    //求数组中只出现一次的数字列表[9,4,3,2,2,2,10,5,10],输出是[9,4,3,5]
     public List<Integer> uniqueNum(int[] arr){
         if(arr == null){
             return null;
@@ -345,7 +344,7 @@ public class Solution {
     public int findInsert(int[] arr, int target){
         int left = 0;
         int right = arr.length - 1;
-        int ins = arr.length;
+        int ins = arr.length;// 假设插入位置在最后一个位置
 
         while(left <= right){
             int mid = (right - left)/2 + left;
@@ -360,11 +359,90 @@ public class Solution {
         return ins;
     }
 
+    //两个升序数组，合并成一个升序数组
+    public int[] merge(int[] arr1, int[] arr2) {
+        int m = arr1.length;
+        int n = arr2.length;
+        int[] mergedArray = new int[m + n];
+        int i = 0, j = 0, k = 0;
+        // 遍历两个数组，按顺序将较小的元素加入到合并后的数组中
+        while (i < m && j < n) {
+            if (arr1[i] <= arr2[j]) {
+                mergedArray[k++] = arr1[i++];
+            } else {
+                mergedArray[k++] = arr2[j++];
+            }
+        }
+        // 如果 arr1 中还有剩余元素，全部加入到合并后的数组中
+        while (i < m) {
+            mergedArray[k++] = arr1[i++];
+        }
+        // 如果 arr2 中还有剩余元素，全部加入到合并后的数组中
+        while (j < n) {
+            mergedArray[k++] = arr2[j++];
+        }
+        return mergedArray;
+    }
+
+    //百度网盘真题：给定两个升序的链表，合并为一个升序的链表
 
 
 
 
+    //天眼查面试题
+    //V2.3.4A 、 V3.2.1B，按以上格式输入两个版本号，编写函数实现返回最新的版本号？
+    public String getVersion(String version1, String version2){
+        String[] parts1 = version1.split("\\.");
+        String[] parts2 = version2.split("\\.");
 
+        //去掉前后的字母，判断每个部分的数字，数字大的版本号大，比如 V4.2.1B 和V3.2.1B
+        for(int i = 0; i< Math.min(parts1.length,parts2.length); i++){
+            String numPart1 = parts1[i].replaceAll("[^0-9]","");
+            String numPart2 = parts2[i].replaceAll("[^0-9]","");
+            int num1 = Integer.parseInt(numPart1);
+            int num2 = Integer.parseInt(numPart2);
+            if(num1 > num2){
+                return version1;
+            } else if(num1 < num2){
+                return version2;
+            }
+        }
+
+        //如果前面的数字都相同，比较长度，比如 V3.2.1B 和 V3.2.1.1B
+        if(parts1.length > parts2.length){
+            return version1;
+        }else if(parts1.length < parts2.length){
+            return version2;
+        }
+
+        //如果前面数字和长度都相同，比较后缀，比如 V3.2.2B 和 V3.2.2A
+        for(int i=0;i< Math.min(parts1.length,parts2.length);i++){
+            String letterPart1 = parts1[i].replaceAll("[0-9]","");
+            String letterPart2 = parts2[i].replaceAll("[0-9]","");
+            int comp = letterPart1.compareTo(letterPart2);
+            //comp 相等为0，小于为-1，大于为1
+            if(comp > 0){
+                return version1;
+            } else if(comp < 0){
+                return version2;
+            }
+        }
+        //两个完全一样
+        return version1;
+    }
+
+    //鸡兔在一个笼子里，一共20只动物，笼子里52只腿；求鸡有多少只、兔有多少只
+    public void munAnimails(){
+        int allAnimails = 20;
+        int allFoots = 52;
+        for(int chi = 0; chi <= allAnimails; chi++){
+            int rabits = allAnimails - chi;
+            if (2 * chi + 4 * rabits == allFoots){
+                System.out.println("鸡有："+ chi + "只，兔子有："+ rabits +"只。");
+                return;
+            }
+        }
+    }
 
 
 }
