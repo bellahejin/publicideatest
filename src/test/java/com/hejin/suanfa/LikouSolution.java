@@ -2,7 +2,6 @@ package com.hejin.suanfa;
 
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -10,7 +9,7 @@ import java.util.*;
  * @create 2024-12-21-21:43
  */
 @NoArgsConstructor
-public class Solution {
+public class LikouSolution {
     //输出数组 num 中两数之和等于 target 的数组下标
     public int[] twoSum(int[] num, int target){
         int len = num.length;
@@ -388,7 +387,6 @@ public class Solution {
 
 
 
-
     //天眼查面试题
     //V2.3.4A 、 V3.2.1B，按以上格式输入两个版本号，编写函数实现返回最新的版本号？
     public String getVersion(String version1, String version2){
@@ -442,6 +440,16 @@ public class Solution {
                 return;
             }
         }
+    }
+
+    //爬楼梯，一次爬 1 或者 2 步，让你爬到第 n 个楼梯，有多少种爬法
+    public int climbstairs(int n){
+        if(n == 1){
+            return 1;
+        }else if(n == 2){
+            return 2;
+        }
+        return climbstairs(n - 1) + climbstairs(n - 2);
     }
 
 
